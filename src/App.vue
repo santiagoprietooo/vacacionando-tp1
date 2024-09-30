@@ -66,7 +66,7 @@ const handleLogout = () => {
     </nav>
 
     <main class="min-h-screen absolute left-[11.5rem] right-44">
-        <div class="p-5 flex flex-col">
+        <div class="flex flex-col">
             <RouterView></RouterView>
         </div>
     </main>

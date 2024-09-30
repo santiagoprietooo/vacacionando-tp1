@@ -3,5 +3,7 @@ import HeaderTitle from '../components/HeaderTitle.vue';
 </script>
 
 <template>
-    <HeaderTitle>Mi Perfil</HeaderTitle>
+    <section class="p-5">
+        <HeaderTitle>Mi Perfil</HeaderTitle>
+    </section>
 </template>

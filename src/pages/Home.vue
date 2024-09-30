@@ -81,51 +81,9 @@ function closeModal() {
 </script>
 
 <template>
-    <HeaderTitle>Bienvenido a la Home</HeaderTitle>
-
-    <section class="flex flex-col mt-8">
-        <article
-            v-for="post in posts"
-            class="p-4 rounded-2xl transition-all hover:bg-slate-800"
-        >
-            <div class="flex flex-row items-center gap-3">
-                <span class="flex flex-col justify-center items-center rounded-full bg-white size-10">
-                    <UserRound class="text-black"/>
-                </span>
-                <p class="text-xl font-bold">Nombre de usuario</p>
-            </div>
-
-            <div class="p-4 mt-3 ml-[3.250rem] flex flex-col border border-slate-500 rounded-2xl">
-                <p class="text-lg font-medium">{{ post.title }}</p>
-                <p class="text-base font-normal">{{ post.description }}</p>
-                <p class="mt-4 text-sm font-semibold">{{ post.location }}</p>
-            </div>
-        </article>
-    </section>
-
-    <button
-        type="button"
-        @click="handleForm"
-        class="p-5 h-14 flex justify-center items-center gap-2 bg-slate-200 rounded-full fixed bottom-5 right-[12.2rem] text-slate-800 transition-all"
-        v-if="loggedUser.id !== null"
-    >
-        <SquarePen/>
-        <span class="text-sm font-bold uppercase">Postear</span>
-    </button>
-
-    <button
-        type="button"
-        @click="handleModal"
-        class="p-5 h-14 flex justify-center items-center gap-2 bg-slate-200 rounded-full fixed bottom-5 right-[12.2rem] text-slate-800 transition-all"
-        v-else
-    >
-        <SquarePen/>
-        <span class="text-sm font-bold uppercase">Postear</span>
-    </button>
-
-    <div :class=" isActive ? 'block absolute top-0 bottom-0 left-0 right-0 z-10' : 'hidden' ">
-        <form action="#" @submit.prevent="handleSubmit" class="absolute top-0 bottom-0 left-0 right-0 z-20 p-3 flex flex-col justify-center items-center bg-slate-700 h-full">
-            <div class="fixed top-4 right-48">
+    <div :class=" isActive ? 'flex relative z-10 h-full' : 'hidden' ">
+        <form action="#" @submit.prevent="handleSubmit" class="w-screen p-3 flex flex-col justify-center items-center bg-slate-700">
+            <div class="absolute top-4 right-4">
                 <button
                     type="button"
                     @click="closeForm"
@@ -134,7 +92,7 @@ function closeModal() {
                     <X class="text-black"/>
                 </button>
             </div>
-        
+            
             <div class="flex flex-col justify-center gap-1 mb-3 w-2/3">
                 <label for="title" class="w-max">Título</label>
                 <input
@@ -193,25 +151,69 @@ function closeModal() {
         </form>
     </div>
 
-    <div :class=" isActive2 ? 'h-full block fixed z-20 top-0 bottom-0 left-0 right-0 bg-slate-900 bg-opacity-90' : 'hidden' ">
-        <div class="flex flex-col p-10 bg-slate-700 rounded-lg">
-            <div class="absolute top-4 right-4">
-                <button
-                    type="button"
-                    @click="closeModal"
-                    class="size-12 flex justify-center items-center rounded-full transition-opacity hover:bg-slate-100 hover:bg-opacity-20"
-                >
-                    <X class="text-white"/>
-                </button>
-            </div>
-            <div class="flex- flex-col text-center">
-                <p class="text-2xl font-semibold">¡No tenés una cuenta!</p>
-                <p class="text-lg mt-4">Para poder postear tenés que <RouterLink to="/log-in">iniciar sesión</RouterLink> o <RouterLink to="/sign-in">crear una cuenta</RouterLink></p>
-            </div>
-            <div class="flex flex-col items-center text-center mt-8 gap-4">
-                <RouterLink to="/log-in" class="p-2 w-2/3 bg-transparente border-2 border-slate-200 rounded-full text-white font-semibold">Iniciar Sesión</RouterLink>
-                <RouterLink to="/sign-in" class="p-2 w-2/3 bg-slate-200 border-2 border-slate-200 rounded-full text-black font-semibold">Crear Cuenta</RouterLink>
+    <section :class=" isActive ? 'hidden' : 'p-5' ">
+        <HeaderTitle>Bienvenido a la Home</HeaderTitle>
+
+        <div :class=" isActive2 ? 'h-full block fixed z-20 top-0 bottom-0 left-0 right-0 bg-slate-900 bg-opacity-90' : 'hidden' ">
+            <div class="flex flex-col p-10 bg-slate-700">
+                <div class="absolute top-4 right-4">
+                    <button
+                        type="button"
+                        @click="closeModal"
+                        class="size-12 flex justify-center items-center rounded-full transition-opacity hover:bg-slate-100 hover:bg-opacity-20"
+                    >
+                        <X class="text-white"/>
+                    </button>
+                </div>
+                <div class="flex- flex-col text-center">
+                    <p class="text-2xl font-semibold">¡No tenés una cuenta!</p>
+                    <p class="text-lg mt-4">Para poder postear tenés que iniciar sesión o crear una cuenta</p>
+                </div>
+                <div class="flex flex-col items-center text-center mt-8 gap-4">
+                    <RouterLink to="/log-in" class="p-2 w-2/3 bg-transparente border-2 border-slate-200 rounded-full text-white font-semibold">Iniciar Sesión</RouterLink>
+                    <RouterLink to="/sign-in" class="p-2 w-2/3 bg-slate-200 border-2 border-slate-200 rounded-full text-black font-semibold">Crear Cuenta</RouterLink>
+                </div>
             </div>
         </div>
-    </div>
+
+        <section class="flex flex-col mt-8">
+            <article
+                v-for="post in posts"
+                class="p-4 rounded-2xl transition-all hover:bg-slate-800"
+            >
+                <div class="flex flex-row items-center gap-3">
+                    <span class="flex flex-col justify-center items-center rounded-full bg-white size-10">
+                        <UserRound class="text-black"/>
+                    </span>
+                    <p class="text-xl font-bold">{{ loggedUser.email }}</p>
+                </div>
+
+                <div class="p-4 mt-3 ml-[3.250rem] flex flex-col border border-slate-500 rounded-2xl">
+                    <p class="text-lg font-medium">{{ post.title }}</p>
+                    <p class="text-base font-normal">{{ post.description }}</p>
+                    <p class="mt-4 text-sm font-semibold">{{ post.location }}</p>
+                </div>
+            </article>
+        </section>
+
+        <button
+            type="button"
+            @click="handleForm"
+            class="p-5 h-14 flex justify-center items-center gap-2 bg-slate-200 rounded-full fixed bottom-5 right-[12.3rem] text-slate-800 transition-all"
+            v-if="loggedUser.id !== null"
+        >
+            <SquarePen/>
+            <span class="text-sm font-bold uppercase">Postear</span>
+        </button>
+
+        <button
+            type="button"
+            @click="handleModal"
+            class="p-5 h-14 flex justify-center items-center gap-2 bg-slate-200 rounded-full fixed bottom-5 right-[12.3rem] text-slate-800 transition-all"
+            v-else
+        >
+            <SquarePen/>
+            <span class="text-sm font-bold uppercase">Postear</span>
+        </button>
+    </section>
 </template>
