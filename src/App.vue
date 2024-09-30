@@ -65,10 +65,8 @@ const handleLogout = () => {
         </template>
     </nav>
 
-    <main class="absolute left-[11.5rem] right-44">
-        <div class="flex flex-col">
-            <RouterView></RouterView>
-        </div>
+    <main class="absolute left-[11.5rem] right-[10.5rem] z-20">
+        <RouterView></RouterView>
     </main>
 
     <footer class="px-3 py-5 h-screen flex flex-col items-center justify-end min-w-44 fixed right-0 border-l border-slate-500">

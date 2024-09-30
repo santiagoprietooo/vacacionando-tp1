@@ -185,7 +185,7 @@ function closeModal() {
                     <span class="flex flex-col justify-center items-center rounded-full bg-white size-10">
                         <UserRound class="text-black"/>
                     </span>
-                    <p class="text-xl font-bold">{{ loggedUser.email }}</p>
+                    <p class="text-xl font-bold">Usuario</p>
                 </div>
 
                 <div class="p-4 mt-3 ml-[3.250rem] flex flex-col border border-slate-500 rounded-2xl">

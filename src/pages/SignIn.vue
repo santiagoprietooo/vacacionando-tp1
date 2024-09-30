@@ -3,5 +3,7 @@ import HeaderTitle from '../components/HeaderTitle.vue';
 </script>
 
 <template>
-    <HeaderTitle>Crear Cuenta</HeaderTitle>
+    <section class="p-5">
+        <HeaderTitle>Crear Cuenta</HeaderTitle>
+    </section>
 </template>
