@@ -1,9 +1,11 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import { savePublicPost, readPublicPosts } from '../services/users-posts';
+import { subscribeToAuthChanges } from '../services/auth';
 import { SquarePen, X, UserRound } from 'lucide-vue-next';
 import HeaderTitle from '../components/HeaderTitle.vue';
 import InputWarning from '../components/InputWarning.vue';
+import { RouterLink } from 'vue-router';
 
 const posts = ref([]);
 const newPosts = ref({
@@ -42,7 +44,18 @@ onMounted(async () => {
     readPublicPosts(newPosts => posts.value = newPosts);
 });
 
+
+const loggedUser = ref({
+    id: null,
+    email: null
+});
+
+onMounted(() => {
+    subscribeToAuthChanges(newUserData => loggedUser.value = newUserData);
+});
+
 let isActive = ref(false);
+let isActive2 = ref(false);
 
 function handleSubmit() {
     savePublicPost({
@@ -57,6 +70,13 @@ function handleForm() {
 }
 function closeForm() {
     isActive.value = false;
+}
+
+function handleModal() {
+    isActive2.value = true;
+}
+function closeModal() {
+    isActive2.value = false;
 }
 </script>
 
@@ -87,6 +107,17 @@ function closeForm() {
         type="button"
         @click="handleForm"
         class="p-5 h-14 flex justify-center items-center gap-2 bg-slate-200 rounded-full fixed bottom-5 right-[12.2rem] text-slate-800 transition-all"
+        v-if="loggedUser.id !== null"
+    >
+        <SquarePen/>
+        <span class="text-sm font-bold uppercase">Postear</span>
+    </button>
+
+    <button
+        type="button"
+        @click="handleModal"
+        class="p-5 h-14 flex justify-center items-center gap-2 bg-slate-200 rounded-full fixed bottom-5 right-[12.2rem] text-slate-800 transition-all"
+        v-else
     >
         <SquarePen/>
         <span class="text-sm font-bold uppercase">Postear</span>
@@ -160,5 +191,27 @@ function closeForm() {
                 </button>
             </div>
         </form>
+    </div>
+
+    <div :class=" isActive2 ? 'h-full block fixed z-20 top-0 bottom-0 left-0 right-0 bg-slate-900 bg-opacity-90' : 'hidden' ">
+        <div class="flex flex-col p-10 bg-slate-700 rounded-lg">
+            <div class="absolute top-4 right-4">
+                <button
+                    type="button"
+                    @click="closeModal"
+                    class="size-12 flex justify-center items-center rounded-full transition-opacity hover:bg-slate-100 hover:bg-opacity-20"
+                >
+                    <X class="text-white"/>
+                </button>
+            </div>
+            <div class="flex- flex-col text-center">
+                <p class="text-2xl font-semibold">¡No tenés una cuenta!</p>
+                <p class="text-lg mt-4">Para poder postear tenés que <RouterLink to="/log-in">iniciar sesión</RouterLink> o <RouterLink to="/sign-in">crear una cuenta</RouterLink></p>
+            </div>
+            <div class="flex flex-col items-center text-center mt-8 gap-4">
+                <RouterLink to="/log-in" class="p-2 w-2/3 bg-transparente border-2 border-slate-200 rounded-full text-white font-semibold">Iniciar Sesión</RouterLink>
+                <RouterLink to="/sign-in" class="p-2 w-2/3 bg-slate-200 border-2 border-slate-200 rounded-full text-black font-semibold">Crear Cuenta</RouterLink>
+            </div>
+        </div>
     </div>
 </template>

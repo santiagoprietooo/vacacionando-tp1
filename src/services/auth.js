@@ -92,7 +92,7 @@ export async function logout() {
 export function subscribeToAuthChanges(callback) {
     observers.push(callback);
 
-    notify();
+    notify(callback);
 }
 
 /**

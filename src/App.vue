@@ -1,5 +1,23 @@
 <script setup>
 import { House, User, LogIn, LogOut } from 'lucide-vue-next';
+import { ref, onMounted } from 'vue';
+import { logout, subscribeToAuthChanges } from './services/auth';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const loggedUser = ref({
+    id: null,
+    email: null
+});
+
+onMounted(() => {
+    subscribeToAuthChanges(newUserData => loggedUser.value = newUserData);
+});
+
+const handleLogout = () => {
+    logout();
+    router.push('/log-in');
+}
 </script>
 
 <template>
@@ -15,23 +33,36 @@ import { House, User, LogIn, LogOut } from 'lucide-vue-next';
                 </RouterLink>
             </li>
 
-            <li class="my-2">
-                <RouterLink to="/log-in" class="px-2 flex justify-left items-center h-14 w-40 gap-3 bg-slate-800 rounded-tl-none rounded-bl-none rounded-tr-full rounded-br-full transition-colors hover:bg-slate-700 focus:bg-slate-900">
-                    <User/> <span>Crear Cuenta</span>
-                </RouterLink>
-            </li>
+            <template v-if="loggedUser.id !== null">
+                <li class="my-2">
+                    <RouterLink to="/profile" class="px-2 flex justify-left items-center h-14 w-40 gap-3 bg-slate-800 rounded-tl-none rounded-bl-none rounded-tr-full rounded-br-full transition-colors hover:bg-slate-700 focus:bg-slate-900">
+                        <User/> <span>Mi Perfil</span>
+                    </RouterLink>
+                </li>
+            </template>
+            <template v-else>
+                <li class="my-2">
+                    <RouterLink to="/log-in" class="px-2 flex justify-left items-center h-14 w-40 gap-3 bg-slate-800 rounded-tl-none rounded-bl-none rounded-tr-full rounded-br-full transition-colors hover:bg-slate-700 focus:bg-slate-900">
+                        <User/> <span>Iniciar Sesión</span>
+                    </RouterLink>
+                </li>
 
-            <li class="my-2">
-                <RouterLink to="/sign-in" class="px-2 flex justify-left items-center h-14 w-40 gap-3 bg-slate-800 rounded-tl-none rounded-bl-none rounded-tr-full rounded-br-full transition-colors hover:bg-slate-700 focus:bg-slate-900">
-                    <LogIn/> <span>Iniciar Sesión</span>
-                </RouterLink>
-            </li>
+                <li class="my-2">
+                    <RouterLink to="/sign-in" class="px-2 flex justify-left items-center h-14 w-40 gap-3 bg-slate-800 rounded-tl-none rounded-bl-none rounded-tr-full rounded-br-full transition-colors hover:bg-slate-700 focus:bg-slate-900">
+                        <LogIn/> <span>Crear Cuenta</span>
+                    </RouterLink>
+                </li>
+            </template>
         </ul>
 
-        <button type="button" class="px-2 flex justify-left items-center h-14 w-40 gap-3 bg-red-800 rounded-tl-none rounded-bl-none rounded-tr-full rounded-br-full transition-colors hover:bg-red-700 focus:bg-red-900">
-            <LogOut />
-            <span>Cerrar Sesión</span>
-        </button>
+        <template v-if="loggedUser.id !== null">
+            <form action="#" @submit.prevent="handleLogout">
+                <button type="submit" class="px-2 flex justify-left items-center h-14 w-40 gap-3 bg-red-800 rounded-tl-none rounded-bl-none rounded-tr-full rounded-br-full transition-colors hover:bg-red-700 focus:bg-red-900">
+                    <LogOut />
+                    <span>Cerrar Sesión</span>
+                </button>
+            </form>
+        </template>
     </nav>
 
     <main class="min-h-screen absolute left-[11.5rem] right-44">
