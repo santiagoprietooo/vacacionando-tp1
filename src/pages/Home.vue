@@ -92,9 +92,9 @@ function closeForm() {
         <span class="text-sm font-bold uppercase">Postear</span>
     </button>
 
-    <div :class=" isActive ? 'block absolute left-0 right-0 top-0 bottom-0 z-20' : 'hidden' ">
-        <form action="#" @submit.prevent="handleSubmit" class="p-3 flex flex-col justify-center items-center bg-slate-700 bg-opacity-95 min-h-screen">
-            <div class="fixed top-2 right-2">
+    <div :class=" isActive ? 'block absolute top-0 bottom-0 left-0 right-0 z-10' : 'hidden' ">
+        <form action="#" @submit.prevent="handleSubmit" class="absolute top-0 bottom-0 left-0 right-0 z-20 p-3 flex flex-col justify-center items-center bg-slate-700 h-full">
+            <div class="fixed top-4 right-48">
                 <button
                     type="button"
                     @click="closeForm"

@@ -3,7 +3,7 @@ import { House, User, LogIn, LogOut } from 'lucide-vue-next';
 </script>
 
 <template>
-    <nav class="pr-6 py-5 h-screen flex flex-col items-center justify-between min-w-44 fixed left-0 z-auto border-r border-slate-500">
+    <nav class="pr-6 py-5 h-screen flex flex-col items-center justify-between min-w-44 fixed left-0 border-r border-slate-500">
         <RouterLink to="/" class="flex justify-center items-center w-max rounded-full bg-slate-800">
             <img src="/icon/bsas-icon.png" alt="ícono de la app">
         </RouterLink>
@@ -34,13 +34,13 @@ import { House, User, LogIn, LogOut } from 'lucide-vue-next';
         </button>
     </nav>
 
-    <main class="w-full ml-[11.5rem] mr-44">
-        <div class="p-5 flex flex-col min-h-screen">
+    <main class="min-h-screen absolute left-[11.5rem] right-44">
+        <div class="p-5 flex flex-col">
             <RouterView></RouterView>
         </div>
     </main>
 
-    <footer class="px-3 py-5 h-screen flex flex-col items-center justify-end min-w-44 fixed right-0 z-auto border-l border-slate-500">
+    <footer class="px-3 py-5 h-screen flex flex-col items-center justify-end min-w-44 fixed right-0 border-l border-slate-500">
         <div>
             <ul class="text-xs text-center">
                 <li>
