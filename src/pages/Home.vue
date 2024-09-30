@@ -81,7 +81,7 @@ function closeModal() {
 </script>
 
 <template>
-    <div :class=" isActive ? 'flex relative z-10 h-full' : 'hidden' ">
+    <div :class=" isActive ? 'flex relative z-10 min-h-screen' : 'hidden' ">
         <form action="#" @submit.prevent="handleSubmit" class="w-screen p-3 flex flex-col justify-center items-center bg-slate-700">
             <div class="absolute top-4 right-4">
                 <button
