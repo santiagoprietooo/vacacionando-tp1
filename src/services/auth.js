@@ -1,5 +1,6 @@
-import { onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
-import { auth } from './firebase';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { setDoc, doc } from "firebase/firestore";
+import { auth, db } from './firebase';
 import { getUserProfileById, updateUserProfile } from "./user-profile";
 
 let loggedUser = {
@@ -44,6 +45,34 @@ onAuthStateChanged(auth, async user => {
 
     notifyAll();
 });
+
+export async function newUser({ email, password, displayName, bio, traveledTo }) {
+    try {
+        const user = await createUserWithEmailAndPassword(auth, email, password);
+        const userRef = doc(db, 'users', user.user.uid);
+
+        await setDoc(userRef, {
+            id: user.user.uid,
+            email,
+            displayName,
+            bio,
+            traveledTo,
+            fullyLoaded: true
+        });
+
+        console.log("Se creó la cuenta con éxito: ", user);
+    } catch (error) {
+        loggedUser = {
+            id: null,
+            email: null,
+            displayName: null,
+            bio: null,
+            traveledTo: null,
+            fullyLoaded: false
+        };
+        console.error("[auth.js newUser] Error al tratar de crear la cuenta: ", error);
+    }
+}
 
 export async function login({email, password}) {
     try {

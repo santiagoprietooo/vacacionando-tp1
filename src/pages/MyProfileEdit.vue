@@ -78,7 +78,7 @@ const handleSubmit = async () => {
             </div>
             
             <div class="flex flex-col justify-center gap-1 mb-5 w-2/3">
-                <label for="bio" class="w-max font-bold">Descripción</label>
+                <label for="bio" class="w-max font-bold">Biografía</label>
                 <textarea
                     id="bio" rows="10"
                     v-model="editData.bio"
@@ -106,7 +106,7 @@ const handleSubmit = async () => {
             </div>
 
             <div class="flex flex-col w-2/3 mt-4">
-                <SubmitButton :disabled="editData.displayName != editData.displayName">
+                <SubmitButton :disabled="!editData.displayName || !editData.bio || !editData.traveledTo">
                     Actualizar Perfil
                 </SubmitButton>
             </div>
