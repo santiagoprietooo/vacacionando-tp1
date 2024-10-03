@@ -1,5 +1,5 @@
 <template>
-    <small class="text-red-400 font-semibold">
+    <small class="mt-1 text-red-400 font-semibold">
         <slot/>
     </small>
 </template>

@@ -7,19 +7,28 @@ import { db } from "./firebase";
 * @returns {{id: string, email: string, displayName: string, bio: string, traveledTo: string}}
 */
 
-export async function getUserProfileById(id){
-    const profileRef = doc(db, `/users/${id}`);
+export async function getUserProfileById(id) {
+    try {
+        const profileRef = doc(db, `/users/${id}`);
+        const profileDocument = await getDoc(profileRef);
 
-    const profileDocument = await getDoc(profileRef);
+        if (!profileDocument.exists()) {
+            throw new Error(`No se encontró el perfil de usuario con ID: ${id}`);
+        }
 
-    return {
-        id: profileDocument.id,
-        email: profileDocument.data().email,
-        displayName: profileDocument.data().displayName,
-        bio: profileDocument.data().bio,
-        traveledTo: profileDocument.data().traveledTo
+        return {
+            id: profileDocument.id,
+            email: profileDocument.data().email,
+            displayName: profileDocument.data().displayName,
+            bio: profileDocument.data().bio,
+            traveledTo: profileDocument.data().traveledTo
+        };
+    } catch (error) {
+        console.error("Error al obtener el perfil del usuario:", error);
+        throw error;
     }
 }
+
 
 /**
 * 

@@ -1,10 +1,13 @@
 <script setup>
+import HeaderTitle from '../components/HeaderTitle.vue';
+import InputWarning from '../components/InputWarning.vue';
+import SubmitButton from '../components/SubmitButton.vue';
+import HandleButton from '../components/HandleButton.vue';
+import CloseButton from '../components/CloseButton.vue';
+import { UserRound } from 'lucide-vue-next';
 import { onMounted, ref } from 'vue';
 import { savePublicPost, readPublicPosts } from '../services/users-posts';
 import { subscribeToAuthChanges } from '../services/auth';
-import { SquarePen, X, UserRound } from 'lucide-vue-next';
-import HeaderTitle from '../components/HeaderTitle.vue';
-import InputWarning from '../components/InputWarning.vue';
 import { RouterLink } from 'vue-router';
 
 const posts = ref([]);
@@ -84,13 +87,7 @@ function closeModal() {
     <div :class=" isActive ? 'flex relative z-10 min-h-screen' : 'hidden' ">
         <form action="#" @submit.prevent="handleSubmit" class="w-screen p-3 flex flex-col justify-center items-center bg-slate-700">
             <div class="absolute top-4 right-4">
-                <button
-                    type="button"
-                    @click="closeForm"
-                    class="size-12 flex justify-center items-center bg-white rounded-full hover:bg-slate-200"
-                >
-                    <X class="text-black"/>
-                </button>
+                <CloseButton @click="closeForm"/>
             </div>
             
             <div class="flex flex-col justify-center gap-1 mb-3 w-2/3">
@@ -139,14 +136,14 @@ function closeModal() {
             </div>
 
             <div class="flex flex-col w-2/3 mt-8">
-                <button
-                    type="submit"
-                    :disabled="newPosts.title.length < 5 || newPosts.title.length > 50 || newPosts.description.length < 10 || newPosts.description.length > 550 || !newPosts.location"
-                    class="px-6 py-2 w-full rounded-lg bg-slate-300 transition-all text-black font-semibold
-                    hover:bg-slate-200 focus:bg-slate-400 disabled:opacity-35"
+                <SubmitButton
+                    :disabled="newPosts.title.length < 5 || newPosts.title.length > 50 ||
+                    newPosts.description.length < 10 || newPosts.description.length > 550 ||
+                    !newPosts.location"
+                    color="slate"
                 >
                     Postear
-                </button>
+                </SubmitButton>
             </div>
         </form>
     </div>
@@ -157,21 +154,15 @@ function closeModal() {
         <div :class=" isActive2 ? 'h-full block fixed z-20 top-0 bottom-0 left-0 right-0 bg-slate-900 bg-opacity-90' : 'hidden' ">
             <div class="flex flex-col p-10 bg-slate-700">
                 <div class="absolute top-4 right-4">
-                    <button
-                        type="button"
-                        @click="closeModal"
-                        class="size-12 flex justify-center items-center rounded-full transition-opacity hover:bg-slate-100 hover:bg-opacity-20"
-                    >
-                        <X class="text-white"/>
-                    </button>
+                    <CloseButton @click="closeModal"/>
                 </div>
                 <div class="flex- flex-col text-center">
                     <p class="text-2xl font-semibold">¡No tenés una cuenta!</p>
                     <p class="text-lg mt-4">Para poder postear tenés que iniciar sesión o crear una cuenta</p>
                 </div>
                 <div class="flex flex-col items-center text-center mt-8 gap-4">
-                    <RouterLink to="/log-in" class="p-2 w-2/3 bg-transparente border-2 border-slate-200 rounded-full text-white font-semibold">Iniciar Sesión</RouterLink>
-                    <RouterLink to="/sign-in" class="p-2 w-2/3 bg-slate-200 border-2 border-slate-200 rounded-full text-black font-semibold">Crear Cuenta</RouterLink>
+                    <RouterLink to="/sign-in" class="p-2 w-2/3 bg-transparente border-2 border-slate-200 rounded-full text-white font-semibold">Iniciar Sesión</RouterLink>
+                    <RouterLink to="/log-in" class="p-2 w-2/3 bg-slate-200 border-2 border-slate-200 rounded-full text-black font-semibold">Crear Cuenta</RouterLink>
                 </div>
             </div>
         </div>
@@ -196,24 +187,7 @@ function closeModal() {
             </article>
         </section>
 
-        <button
-            type="button"
-            @click="handleForm"
-            class="p-5 h-14 flex justify-center items-center gap-2 bg-slate-200 rounded-full fixed bottom-5 right-[12.3rem] text-slate-800 transition-all"
-            v-if="loggedUser.id !== null"
-        >
-            <SquarePen/>
-            <span class="text-sm font-bold uppercase">Postear</span>
-        </button>
-
-        <button
-            type="button"
-            @click="handleModal"
-            class="p-5 h-14 flex justify-center items-center gap-2 bg-slate-200 rounded-full fixed bottom-5 right-[12.3rem] text-slate-800 transition-all"
-            v-else
-        >
-            <SquarePen/>
-            <span class="text-sm font-bold uppercase">Postear</span>
-        </button>
+        <HandleButton @click="handleForm" v-if="loggedUser.id !== null"/>
+        <HandleButton @click="handleModal" v-else/>
     </section>
 </template>

@@ -2,7 +2,9 @@
 import HeaderTitle from '../components/HeaderTitle.vue';
 import { onMounted, ref } from 'vue';
 import { editMyProfile, subscribeToAuthChanges } from '../services/auth';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const argLocations = [
     {province: "Buenos Aires", id: "buenos-aires"},
     {province: "Buenos Aires Capital Federal", id: "capital-federal"},
@@ -51,8 +53,9 @@ const handleSubmit = async () => {
 
     try {
         await editMyProfile({...editData.value});
+        router.push('/profile');
     } catch (error) {
-        console.error("[MyProfileEdit handleSubmit] Error al editar el perfil: ", error);
+        console.error("[MyProfileEdit handleSubmit] Error al actualizar el perfil: ", error);
     }
 
     loading.value = false;
@@ -98,7 +101,7 @@ const handleSubmit = async () => {
             <div class="flex flex-col w-2/3 mt-8">
                 <button
                     type="submit"
-                    :disabled="!editData.displayName || !editData.bio"
+                    :disabled="editData.displayName != editData.displayName"
                     class="px-6 py-2 w-full rounded-lg bg-slate-300 transition-all text-black font-semibold
                     hover:bg-slate-200 focus:bg-slate-400 disabled:opacity-35"
                 >
