@@ -1,4 +1,5 @@
 <script setup>
+import FooterItem from './components/FooterItem.vue';
 import { House, User, LogIn, LogOut } from 'lucide-vue-next';
 import { logout, subscribeToAuthChanges } from './services/auth';
 import { ref, onMounted } from 'vue';
@@ -16,17 +17,14 @@ onMounted(() => {
 
 const handleLogout = () => {
     logout();
-    router.push('/sign-in');
+    router.push('/');
 }
 </script>
 
 <template>
     <nav class="pr-6 py-5 h-screen flex flex-col items-center justify-between min-w-44 fixed left-0 border-r border-slate-500">
-        <RouterLink
-            to="/"
-            class="flex justify-center items-center w-max rounded-full bg-slate-800"
-        >
-            <img src="/icon/bsas-icon.png" alt="ícono de la app">
+        <RouterLink to="/">
+            <img src="/icon/vacacionando-icon.png" alt='ícono de "Vacacionando".' width="80rem">
         </RouterLink>
 
         <ul class="flex flex-col">
@@ -88,28 +86,11 @@ const handleLogout = () => {
     <footer class="px-3 py-5 h-screen flex flex-col items-center justify-end min-w-44 fixed right-0 border-l border-slate-500">
         <div>
             <ul class="text-xs text-center">
+                <FooterItem>Condiciones de Servicio</FooterItem>
+                <FooterItem>Política de Privacidad</FooterItem>
+                <FooterItem>Política de Cookies</FooterItem>
                 <li>
-                    <a href="#" class="hover:underline hover:border-b-white">
-                        Condiciones de Servicio
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#" class="hover:underline hover:border-b-white">
-                        Política de Privacidad
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#" class="hover:underline hover:border-b-white">
-                        Política de Cookies
-                    </a>
-                </li>
-
-                <li>
-                    <span>
-                        <p class="mt-3">&copy; 2024 - Vacacionando</p>
-                    </span>
+                    <span> <p class="mt-3">&copy; 2024 - Vacacionando</p> </span>
                 </li>
             </ul>
         </div>

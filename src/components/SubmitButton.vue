@@ -15,9 +15,10 @@ defineProps({
             'bg-slate-300'       : color == 'slate',
             'hover:bg-slate-200' : color == 'slate',
             'focus:bg-slate-400' : color == 'slate',
-            'bg-red-300'         : color == 'red',
-            'hover:bg-red-200'   : color == 'red',
-            'focus:bg-red-400'   : color == 'red',
+            'bg-red-600'         : color == 'red',
+            'hover:bg-red-500'   : color == 'red',
+            'focus:bg-red-700'   : color == 'red',
+            'text-white'   : color == 'red',
         }"
     >
         <slot/>

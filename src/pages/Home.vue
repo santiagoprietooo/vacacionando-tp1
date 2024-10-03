@@ -2,7 +2,7 @@
 import HeaderTitle from '../components/HeaderTitle.vue';
 import InputWarning from '../components/InputWarning.vue';
 import SubmitButton from '../components/SubmitButton.vue';
-import HandleButton from '../components/HandleButton.vue';
+import PostingButton from '../components/PostingButton.vue';
 import CloseButton from '../components/CloseButton.vue';
 import { UserRound } from 'lucide-vue-next';
 import { onMounted, ref } from 'vue';
@@ -187,7 +187,7 @@ function closeModal() {
             </article>
         </section>
 
-        <HandleButton @click="handleForm" v-if="loggedUser.id !== null"/>
-        <HandleButton @click="handleModal" v-else/>
+        <PostingButton @click="handleForm" v-if="loggedUser.id !== null"/>
+        <PostingButton @click="handleModal" v-else/>
     </section>
 </template>

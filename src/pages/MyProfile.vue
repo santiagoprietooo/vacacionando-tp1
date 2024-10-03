@@ -1,5 +1,7 @@
 <script setup>
 import HeaderTitle from '../components/HeaderTitle.vue';
+import UserItemTitle from '../components/UserItemTitle.vue'
+import UserItemInfo from '../components/UserItemInfo.vue'
 import { onMounted, ref } from 'vue';
 import { subscribeToAuthChanges } from '../services/auth';
 import { Pencil, User } from 'lucide-vue-next';
@@ -37,17 +39,17 @@ onMounted(() => {
             
             <div class="flex flex-col bg-slate-100 text-black">
                 <ul class="px-8">
-                    <li class="font-bold text-lg">Nombre:</li>
-                    <li class="mb-4">{{ loggedUser.displayName || "No definido todavía..." }}</li>
+                    <UserItemTitle>Nombre:</UserItemTitle>
+                    <UserItemInfo>{{ loggedUser.displayName || "No definido todavía..." }}</UserItemInfo>
                     
-                    <li class="font-bold text-lg">Correo Electrónico:</li>
-                    <li class="mb-4">{{ loggedUser.email || "No definido todavía..." }}</li>
+                    <UserItemTitle>Correo Electrónico:</UserItemTitle>
+                    <UserItemInfo>{{ loggedUser.email || "No definido todavía..." }}</UserItemInfo>
                     
-                    <li class="font-bold text-lg">Biografía:</li>
-                    <li class="mb-4">{{ loggedUser.bio || "No definido todavía..." }}</li>
+                    <UserItemTitle>Biografía:</UserItemTitle>
+                    <UserItemInfo>{{ loggedUser.bio || "No definido todavía..." }}</UserItemInfo>
                     
-                    <li class="font-bold text-lg">Viajé a:</li>
-                    <li class="mb-4">{{ loggedUser.traveledTo ? loggedUser.traveledTo.join(', ') : "No definido todavía..." }}</li>
+                    <UserItemTitle>Viajé a:</UserItemTitle>
+                    <UserItemInfo>{{ loggedUser.traveledTo ? loggedUser.traveledTo.join(', ') : "No definido todavía..." }}</UserItemInfo>
                 </ul>
             </div>
         </div>

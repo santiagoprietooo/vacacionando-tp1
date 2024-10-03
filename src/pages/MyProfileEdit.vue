@@ -1,5 +1,6 @@
 <script setup>
 import HeaderTitle from '../components/HeaderTitle.vue';
+import SubmitButton from '../components/SubmitButton.vue';
 import { onMounted, ref } from 'vue';
 import { editMyProfile, subscribeToAuthChanges } from '../services/auth';
 import { useRouter } from 'vue-router';
@@ -99,14 +100,15 @@ const handleSubmit = async () => {
             </div>
 
             <div class="flex flex-col w-2/3 mt-8">
-                <button
-                    type="submit"
-                    :disabled="editData.displayName != editData.displayName"
-                    class="px-6 py-2 w-full rounded-lg bg-slate-300 transition-all text-black font-semibold
-                    hover:bg-slate-200 focus:bg-slate-400 disabled:opacity-35"
-                >
+                <SubmitButton color="red" @click="router.push('/profile')">
+                    Cancelar Cambios
+                </SubmitButton>
+            </div>
+
+            <div class="flex flex-col w-2/3 mt-4">
+                <SubmitButton :disabled="editData.displayName != editData.displayName">
                     Actualizar Perfil
-                </button>
+                </SubmitButton>
             </div>
         </form>
     </section>

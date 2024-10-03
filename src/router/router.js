@@ -33,7 +33,7 @@ subscribeToAuthChanges(newUserData => loggedUser = newUserData);
 router.beforeEach((to, from) => {
     if(to.meta.requiresAuth && loggedUser.id == null){
         return {
-            path: 'log-in'
+            path: '/'
         }
     }
 })
