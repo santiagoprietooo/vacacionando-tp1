@@ -9,12 +9,17 @@ import { onMounted, ref } from 'vue';
 import { savePublicPost, readPublicPosts } from '../services/users-posts';
 import { subscribeToAuthChanges } from '../services/auth';
 import { RouterLink } from 'vue-router';
+import {guardarComentario} from '../services/user-comments'
 
 const posts = ref([]);
 const newPosts = ref({
     title : '',
     description : '',
     location : ''
+});
+
+const newComments = ref({
+    comment : '',
 });
 const argLocations = [
     {province: "Buenos Aires"},
@@ -66,6 +71,12 @@ function handleSubmit() {
     });
 
     isActive.value = false;
+}
+
+function handleComments(){
+    guardarComentario({
+        ...newComments.value,
+    });
 }
 
 function handleForm() {
@@ -142,7 +153,7 @@ function closeModal() {
                     !newPosts.location"
                     color="slate"
                 >
-                    Postear
+                    Realizar posteo
                 </SubmitButton>
             </div>
         </form>
@@ -176,7 +187,7 @@ function closeModal() {
                     <span class="flex flex-col justify-center items-center rounded-full bg-white size-10">
                         <UserRound class="text-black"/>
                     </span>
-                    <p class="text-xl font-bold">Usuario</p>
+                    <p class="text-xl font-bold">{{ loggedUser.email }}</p>
                 </div>
 
                 <div class="p-4 mt-3 ml-[3.250rem] flex flex-col border border-slate-500 rounded-2xl">
@@ -186,21 +197,30 @@ function closeModal() {
                 </div>
 
                 <div class="p-4 mt-3 ml-[3.250rem] flex flex-col items-end gap-2">
-                    <textarea
+                    <form action="" @submit.prevent="handleComments" class="w-full flex">
+                        <textarea
+                         v-model="newComments.comment"
                         id="comment"
                         rows="1"
                         class="py-2 w-full h-full transition-colors bg-transparent border-b-2 border-slate-400 outline-none resize-none text-slate-400 placeholder:text-slate-400 focus:border-white focus:text-white focus:placeholder:text-white"
-                        placeholder="Comentar"
-                    >
+                    > Realizar Comentario
                     </textarea>
-                    <SubmitButton class="w-max">
+                    <SubmitButton  :disabled="!newComments.comment" class="w-max ml-6" v-if="loggedUser.id !== null" >
                         Enviar
                     </SubmitButton>
+                    <SubmitButton class="w-max"  @click="handleModal" v-else>
+                        Enviar comentario
+                    </SubmitButton>
+                    </form>
                 </div>
             </article>
         </section>
 
-        <PostingButton @click="handleForm" v-if="loggedUser.id !== null"/>
-        <PostingButton @click="handleModal" v-else/>
+        <PostingButton @click="handleForm" v-if="loggedUser.id !== null">
+            Postear
+        </PostingButton>
+        <PostingButton @click="handleModal" v-else>
+            Postear
+        </PostingButton>
     </section>
 </template>

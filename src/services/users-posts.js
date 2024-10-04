@@ -1,20 +1,26 @@
-import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp, doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase";
-
 /**
- * @param {{title: string, description: string, location: string}} newPosts
+ * @param {{title: string, description: string, location: string, userId:string}} newPosts
  * @return {Promise}
  **/
 
-export async function savePublicPost({title, description, location}){
-    const usersPosts = collection(db, 'posted-by-users');
+import { getAuth } from "firebase/auth";
 
+export async function savePublicPost({ title, description, location }) {
+  const auth = getAuth();
+  const user = auth.currentUser;
+  if (user) {
+    const userId = user.uid; 
+    const usersPosts = collection(db, 'posted-by-users');
     await addDoc(usersPosts, {
-        title,
-        description,
-        location,
-        created_at: serverTimestamp()
+      title,
+      description,
+      location,
+      created_at: serverTimestamp(),
+      user_id: userId, 
     });
+  } 
 }
 
 export function readPublicPosts(callback){

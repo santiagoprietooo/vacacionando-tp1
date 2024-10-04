@@ -16,7 +16,7 @@ const loggedUser = ref({
 });
 
 onMounted(() => {
-    subscribeToAuthChanges(newUserData => loggedUser.value = newUserData);
+    subscribeToAuthChanges(newUserData => loggedUser.value = newUserData);  
 });
 </script>
 
@@ -52,6 +52,12 @@ onMounted(() => {
                     <UserItemInfo>{{ loggedUser.traveledTo ? loggedUser.traveledTo.join(', ') : "No definido todavía..." }}</UserItemInfo>
                 </ul>
             </div>
+        </div>
+
+        <div>
+            <h3>
+                Posteos realizados por el usuario
+            </h3>
         </div>
     </section>
 </template>
