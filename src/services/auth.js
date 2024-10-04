@@ -46,18 +46,14 @@ onAuthStateChanged(auth, async user => {
     notifyAll();
 });
 
-export async function newUser({ email, password, displayName, bio, traveledTo }) {
+export async function newUser({ email, password }) {
     try {
         const user = await createUserWithEmailAndPassword(auth, email, password);
         const userRef = doc(db, 'users', user.user.uid);
 
         await setDoc(userRef, {
             id: user.user.uid,
-            email,
-            displayName,
-            bio,
-            traveledTo,
-            fullyLoaded: true
+            email
         });
 
         console.log("Se creó la cuenta con éxito: ", user);

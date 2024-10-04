@@ -13,6 +13,10 @@ const user = ref({
 });
 const loading = ref(false);
 const credentials = ref(false);
+const showPassword = ref(false);
+function handlePassword() {
+    showPassword.value = !showPassword.value;
+}
 
 async function handleSubmit() {
     loading.value = true;
@@ -49,11 +53,21 @@ async function handleSubmit() {
 
             <div class="flex flex-col justify-center gap-1 mb-3 w-2/3">
                 <label for="password" class="w-max">Contraseña</label>
-                <input
-                    type="password" id="password"
+                <div class="flex flex-row gap-4">
+                    <input
+                    :type="showPassword ? 'text' : 'password'"
+                    id="password"
                     v-model="user.password"
                     class="px-3 py-2 w-full border-2 rounded-lg border-slate-500 bg-slate-500 transition-colors outline-none focus:bg-slate-800 focus:text-white"
-                >
+                    >
+                    <button
+                        type="button"
+                        @click="handlePassword"
+                        class="w-24 bg-slate-800 font-semibold border-2 border-slate-600 rounded-lg transition-colors hover:bg-slate-600"
+                    >
+                        {{ showPassword ? 'Ocultar' : 'Mostrar' }}
+                    </button>
+                </div>
                 <InputWarning v-if="!user.password">
                     Complete este campo.
                 </InputWarning>
