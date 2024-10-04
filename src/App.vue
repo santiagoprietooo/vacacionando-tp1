@@ -79,7 +79,7 @@ const handleLogout = () => {
         </template>
     </nav>
 
-    <main class="absolute left-[11.5rem] right-[10.5rem] z-20">
+    <main class="absolute left-[11.6rem] right-[11.1rem] z-20">
         <RouterView></RouterView>
     </main>
 

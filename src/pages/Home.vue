@@ -148,7 +148,7 @@ function closeModal() {
         </form>
     </div>
 
-    <section :class=" isActive ? 'hidden' : 'p-5' ">
+    <section :class=" isActive ? 'hidden' : 'py-5' ">
         <HeaderTitle>Bienvenido a la Home</HeaderTitle>
 
         <div :class=" isActive2 ? 'h-full block fixed z-20 top-0 bottom-0 left-0 right-0 bg-slate-900 bg-opacity-90' : 'hidden' ">
@@ -183,6 +183,19 @@ function closeModal() {
                     <p class="text-lg font-medium">{{ post.title }}</p>
                     <p class="text-base font-normal">{{ post.description }}</p>
                     <p class="mt-4 text-sm font-semibold">{{ post.location }}</p>
+                </div>
+
+                <div class="p-4 mt-3 ml-[3.250rem] flex flex-col items-end gap-2">
+                    <textarea
+                        id="comment"
+                        rows="1"
+                        class="py-2 w-full h-full transition-colors bg-transparent border-b-2 border-slate-400 outline-none resize-none text-slate-400 placeholder:text-slate-400 focus:border-white focus:text-white focus:placeholder:text-white"
+                        placeholder="Comentar"
+                    >
+                    </textarea>
+                    <SubmitButton class="w-max">
+                        Enviar
+                    </SubmitButton>
                 </div>
             </article>
         </section>
