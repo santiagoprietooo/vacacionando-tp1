@@ -17,7 +17,7 @@ onMounted(() => {
 
 const handleLogout = () => {
     logout();
-    router.push('/');
+    router.push('/sign-in');
 }
 </script>
 
