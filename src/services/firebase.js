@@ -3,12 +3,12 @@ import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyADSZco5NrUNerfIr5gKt1WygEDzoToWLM",
-    authDomain: "social-app-dwm4ap.firebaseapp.com",
-    projectId: "social-app-dwm4ap",
-    storageBucket: "social-app-dwm4ap.appspot.com",
-    messagingSenderId: "1030654466861",
-    appId: "1:1030654466861:web:aab680d0901ac3af7591a4"
+    apiKey: "AIzaSyA4tggQdofhk33tLj4tkAQG-bnLuSg9MS8",
+    authDomain: "testing-6df50.firebaseapp.com",
+    projectId: "testing-6df50",
+    storageBucket: "testing-6df50.appspot.com",
+    messagingSenderId: "91185489018",
+    appId: "1:91185489018:web:7303efff2ff2030f66c7c3"
 };
 
 const app = initializeApp(firebaseConfig);

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@firebasegen/default": "file:generated/javascript/default",
     "firebase": "^10.13.2",
     "lucide-vue-next": "^0.445.0",
     "vue": "^3.4.37",
