@@ -38,8 +38,8 @@ async function handleSubmit() {
     <section class="p-5">
         <HeaderTitle>Iniciar Sesión</HeaderTitle>
 
-        <form action="#" @submit.prevent="handleSubmit" class="flex flex-col items-center">
-            <div class="flex flex-col justify-center gap-1 mb-3 w-2/3">
+        <form action="#" @submit.prevent="handleSubmit" class="mt-8 flex flex-col items-center">
+            <div class="flex flex-col justify-center gap-1 mb-3 w-full">
                 <label for="email" class="w-max">Email</label>
                 <input
                     type="email" id="email"
@@ -51,7 +51,7 @@ async function handleSubmit() {
                 </InputWarning>
             </div>
 
-            <div class="flex flex-col justify-center gap-1 mb-3 w-2/3">
+            <div class="flex flex-col justify-center gap-1 mb-3 w-full">
                 <label for="password" class="w-max">Contraseña</label>
                 <div class="flex flex-row gap-4">
                     <input
@@ -73,7 +73,7 @@ async function handleSubmit() {
                 </InputWarning>
             </div>
 
-            <div class="flex flex-col w-2/3 mt-8">
+            <div class="flex flex-col w-full mt-8">
                 <SubmitButton
                     :disabled="!user.email || !user.password"
                     color="slate"

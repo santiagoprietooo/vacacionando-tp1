@@ -23,7 +23,7 @@ const handleLogout = () => {
 
 <template>
     <nav class="
-    p-4 flex flex-row items-center justify-between fixed bottom-0 z-30 bg-slate-900 border-t border-slate-500 w-screen
+    py-2 px-6 flex flex-row items-center justify-around fixed bottom-0 z-30 bg-slate-900 border-t border-slate-500 w-screen
 
     md:p-0 md:pr-6 md:py-5 md:h-screen md:w-full md:flex-col md:min-w-44 md:left-0 md:border-r
     ">
@@ -36,12 +36,12 @@ const handleLogout = () => {
                 <RouterLink
                     to="/"
                     class="
-                    size-20 bg-slate-800 flex justify-center items-center hover:bg-slate-700 focus:bg-slate-900 rounded-full
+                    p-4 bg-slate-800 flex justify-center items-center hover:bg-slate-700 focus:bg-slate-900 rounded-full
                     transition-colors
 
                     md:px-2 md:justify-left md:h-14 md:w-40 md:gap-3 md:rounded-tl-none md:rounded-bl-none md:rounded-tr-full md:rounded-br-full"
                 >
-                    <House class="size-10"/> <span class="hidden md:block">Home</span>
+                    <House class="size-7"/> <span class="hidden md:block">Home</span>
                 </RouterLink>
             </li>
 
@@ -49,12 +49,12 @@ const handleLogout = () => {
                 <RouterLink
                     to="/profile"
                     class="
-                    size-20 bg-slate-800 flex justify-center items-center hover:bg-slate-700 focus:bg-slate-900 rounded-full
+                    p-4 bg-slate-800 flex justify-center items-center hover:bg-slate-700 focus:bg-slate-900 rounded-full
                     transition-colors
 
                     md:px-2 md:justify-left md:h-14 md:w-40 md:gap-3 md:rounded-tl-none md:rounded-bl-none md:rounded-tr-full md:rounded-br-full"
                 >
-                    <User class="size-10"/> <span class="hidden md:block">Perfil</span>
+                    <User class="size-7"/> <span class="hidden md:block">Perfil</span>
                 </RouterLink>
             </template>
             <template v-else>
@@ -62,12 +62,12 @@ const handleLogout = () => {
                     <RouterLink
                         to="/sign-in"
                         class="
-                        size-20 bg-slate-800 flex justify-center items-center hover:bg-slate-700 focus:bg-slate-900 rounded-full
+                        p-4 bg-slate-800 flex justify-center items-center hover:bg-slate-700 focus:bg-slate-900 rounded-full
                         transition-colors
 
                         md:px-2 md:justify-left md:h-14 md:w-40 md:gap-3 md:rounded-tl-none md:rounded-bl-none md:rounded-tr-full md:rounded-br-full"
                         >
-                            <User class="size-10"/> <span class="hidden md:block">Iniciar Sesión</span>
+                            <User class="size-7"/> <span class="hidden md:block">Iniciar Sesión</span>
                     </RouterLink>
                 </li>
 
@@ -75,12 +75,12 @@ const handleLogout = () => {
                     <RouterLink
                         to="/log-in"
                         class="
-                        size-20 bg-slate-800 flex justify-center items-center hover:bg-slate-700 focus:bg-slate-900 rounded-full
+                        p-4 bg-slate-800 flex justify-center items-center hover:bg-slate-700 focus:bg-slate-900 rounded-full
                         transition-colors
 
                         md:px-2 md:justify-left md:h-14 md:w-40 md:gap-3 md:rounded-tl-none md:rounded-bl-none md:rounded-tr-full md:rounded-br-full"
                         >
-                            <LogIn class="size-10"/> <span class="hidden md:block">Crear Cuenta</span>
+                            <LogIn class="size-7"/> <span class="hidden md:block">Crear Cuenta</span>
                     </RouterLink>
                 </li>
             </template>
@@ -91,12 +91,12 @@ const handleLogout = () => {
                 <button 
                     type="submit" 
                         class="
-                        size-20 bg-red-800 flex justify-center items-center hover:bg-red-700 focus:bg-red-900 rounded-full
+                        p-4 bg-red-800 flex justify-center items-center hover:bg-red-700 focus:bg-red-900 rounded-full
                         transition-colors
 
                         md:px-2 md:justify-left md:h-14 md:w-40 md:gap-3 md:rounded-tl-none md:rounded-bl-none md:rounded-tr-full md:rounded-br-full"
                     >
-                        <LogOut class="size-10"/> <span class="hidden md:block">Cerrar Sesión</span>
+                        <LogOut class="size-7"/> <span class="hidden md:block">Cerrar Sesión</span>
                 </button>
             </form>
         </template>

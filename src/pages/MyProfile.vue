@@ -21,7 +21,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <section class="p-5 flex flex-col items-center">
+    <section class="px-5 pt-5 pb-48 flex flex-col items-center">
         <div class="flex flex-row justify-center gap-2">
             <HeaderTitle>Mi Perfil</HeaderTitle>
             <RouterLink
@@ -32,13 +32,19 @@ onMounted(() => {
             </RouterLink>
         </div>
 
-        <div class="max-w-full flex flex-row mt-8 bg-slate-100 border-8 border-slate-100 rounded-xl">
-            <div class="p-10 flex flex-col items-center justify-center bg-slate-500 rounded-s-md">
+        <div class="
+            w-full flex flex-col mt-8 bg-slate-100 border-8 border-slate-100 rounded-xl
+
+            md:flex-row
+        ">
+            <div class="
+                p-10 flex flex-col items-center justify-center bg-slate-500 rounded-s-md
+            ">
                 <User class="text-white size-24"/>
             </div>
             
             <div class="flex flex-col bg-slate-100 text-black">
-                <ul class="px-8">
+                <ul class="px-2 pt-2 md:px-8">
                     <UserItemTitle>Nombre:</UserItemTitle>
                     <UserItemInfo>{{ loggedUser.displayName || "No definido todavía..." }}</UserItemInfo>
                     
@@ -52,12 +58,6 @@ onMounted(() => {
                     <UserItemInfo>{{ loggedUser.traveledTo ? loggedUser.traveledTo.join(', ') : "No definido todavía..." }}</UserItemInfo>
                 </ul>
             </div>
-        </div>
-
-        <div>
-            <h3>
-                Posteos realizados por el usuario
-            </h3>
         </div>
     </section>
 </template>
