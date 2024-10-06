@@ -95,7 +95,7 @@ function closeModal() {
 </script>
 
 <template>
-    <div :class=" isActive ? 'flex relative z-10 min-h-screen' : 'hidden' ">
+    <div :class=" isActive ? 'flex relative z-40 min-h-screen' : 'hidden' ">
         <form action="#" @submit.prevent="handleSubmit" class="w-screen p-3 flex flex-col justify-center items-center bg-slate-700">
             <div class="absolute top-4 right-4">
                 <CloseButton @click="closeForm"/>
@@ -159,10 +159,10 @@ function closeModal() {
         </form>
     </div>
 
-    <section :class=" isActive ? 'hidden' : 'py-5' ">
+    <section :class=" isActive ? 'hidden' : 'py-5 pb-32' ">
         <HeaderTitle>Bienvenido a la Home</HeaderTitle>
 
-        <div :class=" isActive2 ? 'h-full block fixed z-20 top-0 bottom-0 left-0 right-0 bg-slate-900 bg-opacity-90' : 'hidden' ">
+        <div :class=" isActive2 ? 'h-full block fixed z-40 top-0 bottom-0 left-0 right-0 bg-slate-900 bg-opacity-90' : 'hidden' ">
             <div class="flex flex-col p-10 bg-slate-700">
                 <div class="absolute top-4 right-4">
                     <CloseButton @click="closeModal"/>
@@ -199,7 +199,7 @@ function closeModal() {
                 <div class="p-4 mt-3 ml-[3.250rem] flex flex-col items-end gap-2">
                     <form action="" @submit.prevent="handleComments" class="w-full flex">
                         <textarea
-                         v-model="newComments.comment"
+                        v-model="newComments.comment"
                         id="comment"
                         rows="1"
                         class="py-2 w-full h-full transition-colors bg-transparent border-b-2 border-slate-400 outline-none resize-none text-slate-400 placeholder:text-slate-400 focus:border-white focus:text-white focus:placeholder:text-white"
