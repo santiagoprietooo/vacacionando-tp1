@@ -64,11 +64,11 @@ const handleSubmit = async () => {
 </script>
 
 <template>
-    <section class="p-5 pb-48">
+    <section class="p-5 pb-48 md:pb-5">
         <HeaderTitle>Editar Mi Perfil</HeaderTitle>
 
         <form action="#" @submit.prevent="handleSubmit" class="mt-8 flex flex-col items-center">
-            <div class="flex flex-col justify-center gap-1 mb-5 w-full">
+            <div class="flex flex-col justify-center gap-1 mb-5 w-2/3">
                 <label for="displayName" class="w-max font-bold">Nombre</label>
                 <input
                     type="text" id="displayName"
@@ -77,7 +77,7 @@ const handleSubmit = async () => {
                 >
             </div>
             
-            <div class="flex flex-col justify-center gap-1 mb-5 w-full">
+            <div class="flex flex-col justify-center gap-1 mb-5 w-2/3">
                 <label for="bio" class="w-max font-bold">Biografía</label>
                 <textarea
                     id="bio" rows="10"
@@ -86,7 +86,7 @@ const handleSubmit = async () => {
                 ></textarea>
             </div>
 
-            <div class="flex flex-col justify-center gap-1 mb-5 w-full">
+            <div class="flex flex-col justify-center gap-1 mb-5 w-2/3">
                 <p class="font-bold">Viajé a...</p>
                 <div class="flex flex-row gap-2 my-1" v-for="location in argLocations">  
                     <input  
@@ -99,13 +99,13 @@ const handleSubmit = async () => {
                 </div>
             </div>
 
-            <div class="flex flex-col w-full mt-8">
+            <div class="flex flex-col w-2/3 mt-8">
                 <SubmitButton color="red" @click="router.push('/profile')">
                     Cancelar Cambios
                 </SubmitButton>
             </div>
 
-            <div class="flex flex-col w-full mt-4">
+            <div class="flex flex-col w-2/3 mt-4">
                 <SubmitButton :disabled="!editData.displayName || !editData.bio || !editData.traveledTo">
                     Actualizar Perfil
                 </SubmitButton>

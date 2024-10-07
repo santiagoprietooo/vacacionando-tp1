@@ -23,9 +23,9 @@ const handleLogout = () => {
 
 <template>
     <nav class="
-    py-2 px-6 flex flex-row items-center justify-around fixed bottom-0 z-30 bg-slate-900 border-t border-slate-500 w-screen
+    py-2 px-6 flex flex-row items-center justify-around fixed bottom-0 z-20 bg-slate-900 border-t border-slate-500 w-screen
 
-    md:p-0 md:pr-6 md:py-5 md:h-screen md:w-full md:flex-col md:min-w-44 md:left-0 md:border-r
+    md:p-0 md:pr-6 md:py-5 md:justify-between md:h-screen md:w-44 md:flex-col md:left-0 md:border-r md:border-t-0
     ">
         <RouterLink to="/" class="hidden md:block">
             <img src="/icon/vacacionando-icon.png" alt='ícono de "Vacacionando".' width="80rem">
@@ -36,10 +36,9 @@ const handleLogout = () => {
                 <RouterLink
                     to="/"
                     class="
-                    p-4 bg-slate-800 flex justify-center items-center hover:bg-slate-700 focus:bg-slate-900 rounded-full
-                    transition-colors
+                    p-4 bg-slate-800 flex justify-center items-center hover:bg-slate-700 focus:bg-slate-900 rounded-full transition-colors
 
-                    md:px-2 md:justify-left md:h-14 md:w-40 md:gap-3 md:rounded-tl-none md:rounded-bl-none md:rounded-tr-full md:rounded-br-full"
+                    md:px-2 md:justify-start md:h-14 md:w-40 md:gap-2 md:rounded-tl-none md:rounded-bl-none md:rounded-tr-full md:rounded-br-full"
                 >
                     <House class="size-7"/> <span class="hidden md:block">Home</span>
                 </RouterLink>
@@ -49,10 +48,9 @@ const handleLogout = () => {
                 <RouterLink
                     to="/profile"
                     class="
-                    p-4 bg-slate-800 flex justify-center items-center hover:bg-slate-700 focus:bg-slate-900 rounded-full
-                    transition-colors
+                    p-4 bg-slate-800 flex justify-center items-center hover:bg-slate-700 focus:bg-slate-900 rounded-full transition-colors
 
-                    md:px-2 md:justify-left md:h-14 md:w-40 md:gap-3 md:rounded-tl-none md:rounded-bl-none md:rounded-tr-full md:rounded-br-full"
+                    md:px-2 md:justify-start md:h-14 md:w-40 md:gap-2 md:rounded-tl-none md:rounded-bl-none md:rounded-tr-full md:rounded-br-full"
                 >
                     <User class="size-7"/> <span class="hidden md:block">Perfil</span>
                 </RouterLink>
@@ -62,10 +60,9 @@ const handleLogout = () => {
                     <RouterLink
                         to="/sign-in"
                         class="
-                        p-4 bg-slate-800 flex justify-center items-center hover:bg-slate-700 focus:bg-slate-900 rounded-full
-                        transition-colors
+                        p-4 bg-slate-800 flex justify-center items-center hover:bg-slate-700 focus:bg-slate-900 rounded-full transition-colors
 
-                        md:px-2 md:justify-left md:h-14 md:w-40 md:gap-3 md:rounded-tl-none md:rounded-bl-none md:rounded-tr-full md:rounded-br-full"
+                        md:px-2 md:justify-start md:h-14 md:w-40 md:gap-2 md:rounded-tl-none md:rounded-bl-none md:rounded-tr-full md:rounded-br-full"
                         >
                             <User class="size-7"/> <span class="hidden md:block">Iniciar Sesión</span>
                     </RouterLink>
@@ -75,10 +72,9 @@ const handleLogout = () => {
                     <RouterLink
                         to="/log-in"
                         class="
-                        p-4 bg-slate-800 flex justify-center items-center hover:bg-slate-700 focus:bg-slate-900 rounded-full
-                        transition-colors
+                        p-4 bg-slate-800 flex justify-center items-center hover:bg-slate-700 focus:bg-slate-900 rounded-full transition-colors
 
-                        md:px-2 md:justify-left md:h-14 md:w-40 md:gap-3 md:rounded-tl-none md:rounded-bl-none md:rounded-tr-full md:rounded-br-full"
+                        md:px-2 md:justify-start md:h-14 md:w-40 md:gap-2 md:rounded-tl-none md:rounded-bl-none md:rounded-tr-full md:rounded-br-full"
                         >
                             <LogIn class="size-7"/> <span class="hidden md:block">Crear Cuenta</span>
                     </RouterLink>
@@ -91,10 +87,9 @@ const handleLogout = () => {
                 <button 
                     type="submit" 
                         class="
-                        p-4 bg-red-800 flex justify-center items-center hover:bg-red-700 focus:bg-red-900 rounded-full
-                        transition-colors
+                        p-4 bg-red-800 flex justify-center items-center hover:bg-red-700 focus:bg-red-900 rounded-full transition-colors
 
-                        md:px-2 md:justify-left md:h-14 md:w-40 md:gap-3 md:rounded-tl-none md:rounded-bl-none md:rounded-tr-full md:rounded-br-full"
+                        md:px-2 md:justify-start md:h-14 md:w-40 md:gap-2 md:rounded-tl-none md:rounded-bl-none md:rounded-tr-full md:rounded-br-full"
                     >
                         <LogOut class="size-7"/> <span class="hidden md:block">Cerrar Sesión</span>
                 </button>
@@ -102,7 +97,7 @@ const handleLogout = () => {
         </template>
     </nav>
 
-    <main class="w-full md:absolute md:left-[11.6rem] md:right-[11.1rem] md:z-20">
+    <main class="md:absolute md:left-44 md:right-44 md:z-20">
         <RouterView></RouterView>
     </main>
 

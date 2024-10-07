@@ -35,7 +35,7 @@ onMounted(() => {
         <div class="
             w-full flex flex-col mt-8 bg-slate-100 border-8 border-slate-100 rounded-xl
 
-            md:flex-row
+            md:flex-row md:w-2/3
         ">
             <div class="
                 p-10 flex flex-col items-center justify-center bg-slate-500 rounded-s-md

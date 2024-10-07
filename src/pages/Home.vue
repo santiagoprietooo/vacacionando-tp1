@@ -9,7 +9,6 @@ import { onMounted, ref } from 'vue';
 import { savePublicPost, readPublicPosts } from '../services/users-posts';
 import { subscribeToAuthChanges } from '../services/auth';
 import { RouterLink } from 'vue-router';
-import {guardarComentario} from '../services/user-comments'
 
 const posts = ref([]);
 const newPosts = ref({
@@ -18,9 +17,6 @@ const newPosts = ref({
     location : ''
 });
 
-const newComments = ref({
-    comment : '',
-});
 const argLocations = [
     {province: "Buenos Aires"},
     {province: "Buenos Aires Capital Federal"},
@@ -71,12 +67,6 @@ function handleSubmit() {
     });
 
     isActive.value = false;
-}
-
-function handleComments(){
-    guardarComentario({
-        ...newComments.value,
-    });
 }
 
 function handleForm() {
@@ -181,7 +171,7 @@ function closeModal() {
         <section class="flex flex-col mt-8">
             <article
                 v-for="post in posts"
-                class="p-4 rounded-2xl transition-all hover:bg-slate-800"
+                class="p-4 transition-all hover:bg-slate-800"
             >
                 <div class="flex flex-row items-center gap-3">
                     <span class="flex flex-col justify-center items-center rounded-full bg-white size-10">
@@ -197,23 +187,23 @@ function closeModal() {
                 </div>
 
                 <div class="p-4 mt-3 ml-[3.250rem] flex flex-col items-end gap-2">
-                    <form action="" @submit.prevent="handleComments" class="w-full flex">
+                    <form action="#" class="w-full flex">
                         <textarea
-                        v-model="newComments.comment"
                         id="comment"
                         rows="1"
-                        class="py-2 w-full h-full transition-colors bg-transparent border-b-2 border-slate-400 outline-none resize-none text-slate-400 placeholder:text-slate-400 focus:border-white focus:text-white focus:placeholder:text-white"
+                        placeholder="Comentar..."
+                        class="px-4 py-2 w-full h-full transition-colors bg-transparent border-2 border-e-0 border-slate-400 rounded-s-full outline-none resize-none text-slate-400 placeholder:text-slate-400 focus:border-white focus:text-white focus:placeholder:text-white"
                         ></textarea>
 
-                        <SubmitButton  :disabled="!newComments.comment" class="w-max ml-6" v-if="loggedUser.id !== null" >
+                        <button type="button" class="w-max px-6 py-2 bg-slate-300 rounded-full rounded-e-full rounded-s-none transition-all text-black font-semibold disabled:opacity-35" v-if="loggedUser.id !== null">
                             <SendHorizontal class="block md:hidden"/>
                             <p class="hidden md:block">Enviar</p>
-                        </SubmitButton>
+                        </button>
 
-                        <SubmitButton class="w-max ml-6"  @click="handleModal" v-else>
-                            <SendHorizontal class="block md:hidden text-black"/>
+                        <button type="button" class="w-max px-6 py-2 bg-slate-300 rounded-full rounded-e-full rounded-s-none transition-all text-black font-semibold disabled:opacity-35" @click="handleModal" v-else>
+                            <SendHorizontal class="block md:hidden"/>
                             <p class="hidden md:block">Enviar</p>
-                        </SubmitButton>
+                        </button>
                     </form>
                 </div>
             </article>
