@@ -82,6 +82,11 @@ function handleModal() {
 function closeModal() {
     isActive2.value = false;
 }
+
+function timestampToText(timestamp) {  
+    const date = new Date(timestamp.seconds * 1000 + timestamp.nanoseconds / 1e6);  
+    return date.toLocaleString();  
+} 
 </script>
 
 <template>
@@ -175,11 +180,27 @@ function closeModal() {
                 v-for="post in posts"
                 class="p-4 transition-all hover:bg-slate-800"
             >
-                <div class="flex flex-row items-center gap-3">
-                    <span class="flex flex-col justify-center items-center rounded-full bg-white size-10">
-                        <UserRound class="text-black"/>
-                    </span>
-                    <p class="text-xl font-bold">{{ loggedUser.email || "Usuario" }}</p>
+                <div class="flex flex-row items-center justify-between">
+                    <div class="flex flex-row items-center gap-3">
+                        <RouterLink :to="`/profile/${post.user_id}`">
+                            <span class="flex flex-col justify-center items-center rounded-full bg-white size-10">
+                                <UserRound class="text-black"/>
+                            </span>
+                        </RouterLink>
+                        <RouterLink :to="`/profile/${post.user_id}`">
+                            <p class="text-xl font-bold">{{ post.user_email }}</p>                        
+                        </RouterLink>
+                    </div>
+                    <div>
+                        <p class="text-xs font-medium">
+                            {{
+                                timestampToText(post.created_at).slice(
+                                    timestampToText(post.created_at),
+                                    timestampToText(post.created_at).indexOf(',')
+                                )
+                            }}
+                        </p>
+                    </div>
                 </div>
 
                 <div class="p-4 mt-3 ml-[3.250rem] flex flex-col border border-slate-500 rounded-2xl">

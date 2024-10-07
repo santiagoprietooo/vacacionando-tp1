@@ -106,7 +106,7 @@ const handleSubmit = async () => {
             </div>
 
             <div class="flex flex-col w-2/3 mt-4">
-                <SubmitButton :disabled="!editData.displayName || !editData.bio || !editData.traveledTo">
+                <SubmitButton>
                     Actualizar Perfil
                 </SubmitButton>
             </div>

@@ -23,9 +23,9 @@ const handleLogout = () => {
 
 <template>
     <nav class="
-    py-2 px-6 flex flex-row items-center justify-around fixed bottom-0 z-20 bg-slate-900 border-t border-slate-500 w-screen
+    py-2 px-6 flex flex-row items-center justify-between fixed bottom-0 z-20 bg-slate-900 border-t border-slate-500 w-screen
 
-    lg:p-0 lg:pr-6 lg:py-5 lg:justify-between lg:h-screen lg:w-44 lg:flex-col lg:left-0 lg:border-r lg:border-t-0
+    lg:p-0 lg:pr-6 lg:py-5 lg:h-screen lg:w-44 lg:flex-col lg:left-0 lg:border-r lg:border-t-0
     ">
         <RouterLink to="/" class="hidden lg:block">
             <img src="/icon/vacacionando-icon.png" alt='ícono de "Vacacionando".' width="80rem">

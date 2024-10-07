@@ -5,14 +5,17 @@ import SignIn from '../pages/SignIn.vue';
 import LogIn from '../pages/LogIn.vue';
 import MyProfile from '../pages/MyProfile.vue';
 import MyProfileEdit from '../pages/MyProfileEdit.vue';
+import UserProfile from '../pages/UserProfile.vue';
+
 import { subscribeToAuthChanges } from '../services/auth';
 
 const routes = [
-    { path: '/', component: Home },
-    { path: '/log-in', component: LogIn },
-    { path: '/sign-in', component: SignIn },
-    { path: '/profile', component: MyProfile, meta: { requiresAuth: true } },
-    { path: '/profile/edit', component: MyProfileEdit, meta: { requiresAuth: true } }
+    { path: '/',                 component: Home },
+    { path: '/log-in',           component: LogIn },
+    { path: '/sign-in',          component: SignIn },
+    { path: '/profile',          component: MyProfile, meta: { requiresAuth: true } },
+    { path: '/profile/edit',     component: MyProfileEdit, meta: { requiresAuth: true } },
+    { path: '/profile/:user_id', component: UserProfile }
 ];
 
 const router = createRouter({

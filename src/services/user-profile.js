@@ -45,23 +45,3 @@ export async function updateUserProfile(id, {displayName, bio, traveledTo}){
         traveledTo
     });
 }
-
-
-export async function getPostsByUserId(id) {
-    try {
-      const postsRef = collection(db, "posted-by-users");
-      const query = where("user_id", "==", id);
-      const querySnapshot = await getDocs(postsRef, query);
-  
-      const posts = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-  
-      return posts;
-    } catch (error) {
-      console.error("Error al obtener los posteos del usuario:", error);
-      throw error;
-    }
-    
-  }
