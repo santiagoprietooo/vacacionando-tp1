@@ -154,21 +154,23 @@ function closeModal() {
 
         <div :class=" isActive2 ? 'h-full block fixed z-40 top-0 bottom-0 left-0 right-0 bg-slate-900 bg-opacity-90' : 'hidden' ">
             <div class="flex flex-col p-10 bg-slate-700">
-                <div class="absolute top-4 right-4">
+                <div class="absolute top-1 right-1">
                     <CloseButton @click="closeModal"/>
                 </div>
-                <div class="flex- flex-col text-center">
-                    <p class="text-2xl font-semibold">¡No tenés una cuenta!</p>
-                    <p class="text-lg mt-4">Para poder postear tenés que iniciar sesión o crear una cuenta</p>
-                </div>
-                <div class="flex flex-col items-center text-center mt-8 gap-4">
-                    <RouterLink to="/sign-in" class="p-2 w-3/4 bg-transparente border-2 border-slate-200 rounded-full text-white font-semibold">Iniciar Sesión</RouterLink>
-                    <RouterLink to="/log-in" class="p-2 w-3/4 bg-slate-200 border-2 border-slate-200 rounded-full text-black font-semibold">Crear Cuenta</RouterLink>
+                <div class="mt-4">
+                    <div class="flex- flex-col text-center">
+                        <p class="text-2xl font-semibold">¡No tenés una cuenta!</p>
+                        <p class="text-lg mt-2">Para poder postear tenés que iniciar sesión o crear una cuenta</p>
+                    </div>
+                    <div class="flex flex-col items-center text-center mt-8 gap-4">
+                        <RouterLink to="/sign-in" class="p-2 w-full md:w-3/4 bg-transparente border-2 border-slate-200 rounded-full text-white font-semibold">Iniciar Sesión</RouterLink>
+                        <RouterLink to="/log-in" class="p-2 w-full md:w-3/4 bg-slate-200 border-2 border-slate-200 rounded-full text-black font-semibold">Crear Cuenta</RouterLink>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <section class="flex flex-col mt-8">
+        <section class="flex flex-col mt-8 border-t border-slate-500">
             <article
                 v-for="post in posts"
                 class="p-4 transition-all hover:bg-slate-800"
@@ -186,8 +188,8 @@ function closeModal() {
                     <p class="mt-4 text-sm font-semibold">{{ post.location }}</p>
                 </div>
 
-                <div class="p-4 mt-3 ml-[3.250rem] flex flex-col items-end gap-2">
-                    <form action="#" class="w-full flex">
+                <div class="mt-3 ml-[3.250rem] flex flex-col items-end gap-2">
+                    <form action="#" class="w-full flex" @submit.prevent="">
                         <textarea
                         id="comment"
                         rows="1"
@@ -195,15 +197,15 @@ function closeModal() {
                         class="px-4 py-2 w-full h-full transition-colors bg-transparent border-2 border-e-0 border-slate-400 rounded-s-full outline-none resize-none text-slate-400 placeholder:text-slate-400 focus:border-white focus:text-white focus:placeholder:text-white"
                         ></textarea>
 
-                        <button type="button" class="w-max px-6 py-2 bg-slate-300 rounded-full rounded-e-full rounded-s-none transition-all text-black font-semibold disabled:opacity-35" v-if="loggedUser.id !== null">
+                        <SubmitButton rounded="comment" width="max" v-if="loggedUser.id !== null">
                             <SendHorizontal class="block md:hidden"/>
                             <p class="hidden md:block">Enviar</p>
-                        </button>
+                        </SubmitButton>
 
-                        <button type="button" class="w-max px-6 py-2 bg-slate-300 rounded-full rounded-e-full rounded-s-none transition-all text-black font-semibold disabled:opacity-35" @click="handleModal" v-else>
+                        <SubmitButton rounded="comment" width="max" @click="handleModal" v-else>
                             <SendHorizontal class="block md:hidden"/>
                             <p class="hidden md:block">Enviar</p>
-                        </button>
+                        </SubmitButton>
                     </form>
                 </div>
             </article>

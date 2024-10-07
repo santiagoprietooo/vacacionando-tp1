@@ -15,6 +15,11 @@ const loading = ref(false);
 const credentials = ref(false);
 const showPassword = ref(false);
 
+function isValidEmail(email){
+    const invalidChars = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return invalidChars.test(email);
+}
+
 function handlePassword() {
     showPassword.value = !showPassword.value;
 }
@@ -43,21 +48,21 @@ async function handleSubmit() {
             @submit.prevent="handleSubmit"
             class="mt-8 flex flex-col items-center"
         >
-            <div class="flex flex-col justify-center gap-1 mb-3 w-2/3">
+            <div class="flex flex-col justify-center gap-1 mb-3 w-full md:w-2/3">
                 <label for="email" class="w-max">Email</label>
                 <input
                     type="email" id="email"
                     v-model="createUser.email"
                     class="px-3 py-2 w-full border-2 rounded-lg border-slate-500 bg-slate-500 transition-colors outline-none focus:bg-slate-800 focus:text-white"
                 >
-                <InputWarning v-if="!createUser.email.includes('@')">
-                        Esta no es una dirección de correo valida.
+                <InputWarning v-if="!isValidEmail(createUser.email)">
+                    Esta no es una dirección de correo valida.
                 </InputWarning>
             </div>
 
-            <div class="flex flex-col justify-center gap-1 mb-3 w-2/3">
+            <div class="flex flex-col justify-center gap-1 mb-3 w-full md:w-2/3">
                 <label for="password" class="w-max">Contraseña</label>
-                <div class="flex flex-row gap-4">
+                <div class="flex flex-row gap-1">
                     <input
                     :type="showPassword ? 'text' : 'password'"
                     id="password"
@@ -80,7 +85,7 @@ async function handleSubmit() {
                 </InputWarning>
             </div>
 
-            <div class="flex flex-col w-2/3 mt-8">
+            <div class="flex flex-col w-full md:w-2/3 mt-8">
                 <SubmitButton
                     :disabled="!createUser.email || !createUser.password || createUser.password.length < 6"
                     color="slate"
