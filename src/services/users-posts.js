@@ -1,13 +1,14 @@
-import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from "firebase/firestore";
+import { doc, addDoc, collection, getDoc, onSnapshot, orderBy, query, serverTimestamp, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "./firebase";
 /**
- * @param {{title: string, description: string, location: string, created_at: string, user_id: string, user_email: string}} newPosts
+ * @param {{title: string, description: string, location: string, created_at: string, user_id: string, user_email: string, comments: string}} newPosts
  * @return {Promise}
  **/
 
 import { getAuth } from "firebase/auth";
+import { comment } from "postcss";
 
-export async function savePublicPost({ title, description, location, created_at, user_id, user_email }) {
+export async function savePublicPost({ title, description, location }) {
   const auth = getAuth();
   const user = auth.currentUser;
   if (user) {
@@ -18,11 +19,32 @@ export async function savePublicPost({ title, description, location, created_at,
       title,
       description,
       location,
-      created_at: serverTimestamp(),
       user_id: userId,
-      user_email: userEmail
+      user_email: userEmail,
+      created_at: serverTimestamp(),
+      comments: []
     });
   } 
+}
+
+/**
+ * @param {{comments: string, comment: string, created_at: string}} newComments
+ * @return {Promise}
+ **/
+
+export async function savePublicComment({postId, comment}) {
+  const publicComment = doc(db, 'posted-by-users', postId);
+  const readPost = await getDoc(publicComment);
+
+  if (readPost.exists()) {
+    await updateDoc(publicComment, {
+      comments: arrayUnion({
+        comment: comment
+      })
+    });
+  } else {
+    throw new Error('No se encontró el post con el ID: ', postId);
+  }
 }
 
 export function readPublicPosts(callback){
@@ -38,9 +60,26 @@ export function readPublicPosts(callback){
                 location: doc.data().location,
                 created_at: doc.data().created_at,
                 user_id: doc.data().user_id,
-                user_email: doc.data().user_email
+                user_email: doc.data().user_email,
+                comments: doc.data().comments || []
             }
         });
         callback(posts);
     });
+}
+
+export function readPublicComments(callback){
+  const userComments = collection(db, 'posted-by-users');
+  const commentQuery = query(userComments, orderBy('created_at', 'desc'));
+
+  onSnapshot(commentQuery, snapshot => {
+    const comments = snapshot.docs.map(doc => {
+      return {
+        id: doc.id,
+        comment: doc.data().comment,
+        comments: doc.data().comments
+      }
+    });
+    callback(comments);
+  })
 }

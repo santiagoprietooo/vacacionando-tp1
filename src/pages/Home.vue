@@ -44,8 +44,9 @@ const argLocations = [
     {province: "Tucumán"}
 ]
 
-onMounted(async () => {
+onMounted(() => {
     readPublicPosts(newPosts => posts.value = newPosts);
+    subscribeToAuthChanges(newUserData => loggedUser.value = newUserData);
 });
 
 
@@ -54,16 +55,12 @@ const loggedUser = ref({
     email: null
 });
 
-onMounted(() => {
-    subscribeToAuthChanges(newUserData => loggedUser.value = newUserData);
-});
-
 let isActive = ref(false);
 let isActive2 = ref(false);
 
 function handleSubmit() {
     savePublicPost({
-        ...newPosts.value,
+        ...newPosts.value
     });
 
     isActive.value = false;
@@ -82,11 +79,6 @@ function handleModal() {
 function closeModal() {
     isActive2.value = false;
 }
-
-function timestampToText(timestamp) {  
-    const date = new Date(timestamp.seconds * 1000 + timestamp.nanoseconds / 1e6);  
-    return date.toLocaleString();  
-} 
 </script>
 
 <template>
@@ -180,8 +172,7 @@ function timestampToText(timestamp) {
                 v-for="post in posts"
                 class="p-4 transition-all hover:bg-slate-800"
             >
-                <div class="flex flex-row items-center justify-between">
-                    <div class="flex flex-row items-center gap-3">
+                <div class="flex flex-row items-center gap-4">
                         <RouterLink :to="`/profile/${post.user_id}`">
                             <span class="flex flex-col justify-center items-center rounded-full bg-white size-10">
                                 <UserRound class="text-black"/>
@@ -190,32 +181,28 @@ function timestampToText(timestamp) {
                         <RouterLink :to="`/profile/${post.user_id}`">
                             <p class="text-xl font-bold">{{ post.user_email }}</p>                        
                         </RouterLink>
-                    </div>
-                    <div>
-                        <p class="text-xs font-medium">
+                </div>
+
+                <div class="relative p-4 mt-3 ml-[3.250rem] flex flex-col border border-slate-500 rounded-2xl">
+                    <div class="px-2 py-1 absolute top-0 right-0 bg-slate-500 border border-slate-500 rounded-se-xl">
+                        <p class="text-xs text-right font-medium">
                             {{
-                                timestampToText(post.created_at).slice(
-                                    timestampToText(post.created_at),
-                                    timestampToText(post.created_at).indexOf(',')
-                                )
+                                post.created_at.toDate().toLocaleString()
                             }}
                         </p>
                     </div>
-                </div>
-
-                <div class="p-4 mt-3 ml-[3.250rem] flex flex-col border border-slate-500 rounded-2xl">
-                    <p class="text-lg font-medium">{{ post.title }}</p>
+                    <p class="text-xl font-medium">{{ post.title }}</p>
                     <p class="text-base font-normal">{{ post.description }}</p>
                     <p class="mt-4 text-sm font-semibold">{{ post.location }}</p>
                 </div>
 
                 <div class="mt-3 ml-[3.250rem] flex flex-col items-end gap-2">
-                    <form action="#" class="w-full flex" @submit.prevent="">
+                    <form action="#" class="w-full flex">
                         <textarea
                         id="comment"
                         rows="1"
                         placeholder="Comentar..."
-                        class="px-4 py-2 w-full h-full transition-colors bg-transparent border-2 border-e-0 border-slate-400 rounded-s-full outline-none resize-none text-slate-400 placeholder:text-slate-400 focus:border-white focus:text-white focus:placeholder:text-white"
+                        class="px-4 py-2 w-full h-full transition-colors bg-transparent border-2 border-slate-300 rounded-s-full border-opacity-35 outline-none resize-none text-slate-400 placeholder:text-slate-400 focus:border-opacity-100 focus:text-white focus:placeholder:text-white"
                         ></textarea>
 
                         <SubmitButton rounded="comment" width="max" v-if="loggedUser.id !== null">

@@ -13,9 +13,9 @@ const routes = [
     { path: '/',                 component: Home },
     { path: '/log-in',           component: LogIn },
     { path: '/sign-in',          component: SignIn },
-    { path: '/profile',          component: MyProfile, meta: { requiresAuth: true } },
+    { path: '/profile',          component: MyProfile,     meta: { requiresAuth: true } },
     { path: '/profile/edit',     component: MyProfileEdit, meta: { requiresAuth: true } },
-    { path: '/profile/:user_id', component: UserProfile }
+    { path: '/profile/:id',      component: UserProfile}
 ];
 
 const router = createRouter({
